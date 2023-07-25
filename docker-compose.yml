@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  fish:
+    build: .
+    ports:
+      - "65000:65000"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13.3
+    volumes:
+      - tracker-pg-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=phishing_url_feed
+
+volumes:
+  tracker-pg-data:
